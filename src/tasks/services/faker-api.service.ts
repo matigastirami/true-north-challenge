@@ -1,17 +1,8 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
-
-enum Status {
-  pending = 'pending',
-  done = 'done',
-}
-
-export interface ITask {
-  uuid: string;
-  title: string;
-  status: Status;
-}
+import { Status } from '../enums/status.enum';
+import { ITask } from '../interfaces/task.interface';
 
 @Injectable()
 export class FakerApiService {

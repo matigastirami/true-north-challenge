@@ -6,21 +6,22 @@ import {
   Param,
   Put,
   Query,
-  Logger
+  Logger,
 } from '@nestjs/common';
-import { FakerApiService, ITask } from './services/faker-api.service';
+import { FakerApiService } from './services/faker-api.service';
 import { validate as uuidValidate } from 'uuid';
+import { ITask } from './interfaces/task.interface';
 
 @Controller('tasks')
 export class TasksController {
-  constructor(
-    private readonly fakerApiService: FakerApiService,
-  ) {}
+  constructor(private readonly fakerApiService: FakerApiService) {}
 
   private readonly logger = new Logger(TasksController.name);
 
   @Get()
-  async fetchTitlesAndUpsert(@Query('quantity') quantity?: number): Promise<ITask[]> {
+  async fetchTitlesAndUpsert(
+    @Query('quantity') quantity?: number,
+  ): Promise<ITask[]> {
     try {
       const fetchTasksResponse = await this.fakerApiService.fetch(quantity);
 
@@ -28,7 +29,6 @@ export class TasksController {
         !fetchTasksResponse ||
         ![200, 201].includes(fetchTasksResponse.status)
       ) {
-
         this.logger.error('Could not fetch faker API');
 
         throw new HttpException(
@@ -42,7 +42,6 @@ export class TasksController {
       const tasks = this.fakerApiService.processTitles(fetchTasksResponse.data);
 
       return tasks;
-
     } catch (err) {
       throw err;
     }
@@ -50,18 +49,14 @@ export class TasksController {
 
   @Put(':uuid')
   async completeTask(@Param('uuid') uuid: string) {
-
-    if(!uuidValidate(uuid)) {
-      throw new HttpException(
-        'Invalid UUID',
-        HttpStatus.BAD_REQUEST,
-      );
+    if (!uuidValidate(uuid)) {
+      throw new HttpException('Invalid UUID', HttpStatus.BAD_REQUEST);
     }
 
     const msg = `Task status for uuid ${uuid} sucessfully updated`;
     this.logger.log(msg);
     return {
-        msg
-    }
+      msg,
+    };
   }
 }

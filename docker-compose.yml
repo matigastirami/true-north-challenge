@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  client:
+    extends:
+      file: ./client/docker-compose.yml
+      service: web
+    links:
+      - server
+    networks:
+      - truenorth
+  server:
+    extends:
+      file: ./server/docker-compose.yml
+      service: server
+    networks:
+      - truenorth
+
+networks:
+  truenorth:
+    driver: bridge

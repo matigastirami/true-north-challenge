@@ -1,5 +1,6 @@
 services:
-  app:
+  server:
+    container_name: server
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,4 +11,4 @@ services:
     - .env
     command: npm run start:dev
     ports:
-      - 3000:3000
+      - "3001:3001"

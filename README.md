@@ -15,13 +15,15 @@ Code challenge for True North (Full stack)
 ## Executing automated tests
 
 ### Unit tests
-Open your terminal and execute `npm run test`
+1. Open your terminal and execute `cd server/`
+2. Execute `npm run test`
 
 ![Unit tests](/images/unit-test.jpg?raw=true "Unit tests result")
 
 ### e2e tests
 
-Open your terminal and execute `npm run test:e2e`
+1. Open your terminal and execute `cd server/`
+2. Execute `npm run test:e2e`
 
 ![e2e tests](/images/e2e-test.jpg?raw=true "e2e tests result")
 
@@ -36,3 +38,7 @@ Open your terminal and execute `npm run test:e2e`
 
 # Access frontend app
 - Open `http://localhost:3000/` on your browser
+
+## Unit tests for frontend (React Testing Library)
+1. cd into `client/`
+2. Execute `npm run test:unit`

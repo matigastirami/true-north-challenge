@@ -1,19 +1,12 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { ITaskProps } from "../../interfaces/tasks.interfaces";
 import TaskView from "./task-view";
-
-interface ITaskProps {
-  taskInfo: {
-    uuid: string;
-    title: string;
-    status: string;
-  };
-}
 
 function Task(props: ITaskProps) {
   const {
-    taskInfo: { uuid, title, status },
+    taskInfo: { uuid, title, status }
   } = props;
 
   const [show, setShow] = useState(false);

@@ -2,13 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Alert, ListGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { ITaskViewProps } from "../../interfaces/tasks.interfaces";
 import TaskService from "../../services/task.service";
-
-interface ITaskViewProps {
-  show: boolean;
-  task: any;
-  onClose: any;
-}
 
 function TaskView(props: ITaskViewProps) {
   const { task, show, onClose } = props;
@@ -37,11 +32,6 @@ function TaskView(props: ITaskViewProps) {
       success && <Alert variant={"success"}>Task successfully updated</Alert>
     );
   };
-
-  const handleModalClose = () => {
-    setSuccess(false);
-    onClose();
-  }
 
   return (
     <>

@@ -8,4 +8,6 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
+EXPOSE 3001
+
 USER node
